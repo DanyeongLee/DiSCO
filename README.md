@@ -1,3 +1,3 @@
-# DiSCO
+# DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization
 
 WIP...
