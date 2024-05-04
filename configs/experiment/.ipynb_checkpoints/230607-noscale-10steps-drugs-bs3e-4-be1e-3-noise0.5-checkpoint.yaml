@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - override /train: train-default
+  - override /model: e3nn
+  - override /diffusion: i2sb
+  - override /train: train-default
+  - override /dataset: drugs
+  - override /logger: wandb
+
+
+train:
+  optimizer_type: 'adam'
+  lr: 1e-3
+  weight_decay: 0
+  patience: 10
+
+  num_workers: 20
+  batch_size: 128
+  test_batch_size: 202
+  ema_decay: 0.99
+
+dataset:
+  etkdg: true
+  etkdg_noise: 0.5
+  zero_com: true
+  scale: null
+
+diffusion:
+  noise_schedule:
+    _target_: src.diffusions.noise_schedule.symmetric_quadratic_schedule
+    beta_start: 3e-4
+    beta_end: 1e-3
+    n_timesteps: 10
+
+
+name: '230607-noscale-10steps-drugs-bs3e-4-be1e-3-noise0.5'

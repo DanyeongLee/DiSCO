@@ -1,0 +1,19 @@
+train_path: 'data/qm9_processed/train_data_40k.pkl'
+val_path: 'data/qm9_processed/val_data_5k.pkl'
+test_path: 'data/qm9_processed/test_data_200.pkl'
+
+n_node_features: 44
+etkdg: false
+etkdg_noise: null
+etkdg_noise_random: false
+zero_com: false
+
+scale: null
+
+removeH: false
+
+from_torsion: false
+from_rc: false
+from_dmcg: false
+
+uniform_ratio: null

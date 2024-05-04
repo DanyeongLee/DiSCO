@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+  - override /train: train-default
+  - override /model: e3nn
+  - override /diffusion: i2sb
+  - override /dataset: qm9-dmcg
+  - override /logger: wandb
+
+
+train:
+  optimizer_type: 'adam'
+  lr: 1e-3
+  weight_decay: 0
+  patience: 10
+  n_epochs: 250
+
+  num_workers: 20
+  batch_size: 128
+  test_batch_size: 202
+  ema_decay: 0.99
+
+  test_interval: 300
+
+diffusion:
+  noise_schedule:
+    _target_: src.diffusions.noise_schedule.symmetric_sigmoid_schedule
+    beta_start: 1e-4
+    beta_end: 3e-4
+    n_timesteps: 10
+
+
+name: '230723-fromdmcg-qm9-10steps-sigmoid-final'

@@ -1,0 +1,31 @@
+# @package _global_
+
+defaults:
+  - override /train: train-default
+  - override /model: e3nn
+  - override /diffusion: i2sb
+  - override /train: train-default
+  - override /dataset: qm9
+  - override /logger: wandb
+
+
+train:
+  num_workers: 32
+  batch_size: 128
+  test_batch_size: 202
+  ema_decay: 0.99
+
+dataset:
+  etkdg: true
+  zero_com: true
+  scale: 5
+
+diffusion:
+  noise_schedule:
+    _target_: src.diffusions.noise_schedule.symmetric_quadratic_schedule
+    beta_start: 1e-4
+    beta_end: 3e-4
+    n_timesteps: 1000
+
+
+name: 'qm9-e3nn-i2sb-zerocom-org-1000steps-scale5'

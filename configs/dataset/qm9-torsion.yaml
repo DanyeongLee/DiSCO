@@ -1,0 +1,16 @@
+train_path: 'data/qm9_processed/train_data_40k.pkl'
+torsion_train_path: '../torsional-diffusion/geodiff_split_qm9_run/train_qm9_20steps_50confs.pkl'
+val_path: 'data/qm9_processed/val_data_5k.pkl'
+torsion_val_path: '../torsional-diffusion/geodiff_split_qm9_run/val_qm9_20steps_50confs.pkl'
+test_path: 'data/qm9_processed/test_data_200.pkl'
+torsion_test_path: '../torsional-diffusion/geodiff_split_qm9_run/test_qm9_20steps.pkl'
+
+n_node_features: 44
+
+from_torsion: true
+from_rc: false
+from_dmcg: false
+
+etkdg_noise: null
+etkdg: false
+uniform_ratio: null

@@ -1,0 +1,16 @@
+train_path: 'data/drugs_processed/train_data_39k.pkl'
+torsion_train_path: '../torsional-diffusion/geodiff_split_run/train_drugs_20steps_50confs.pkl'
+val_path: 'data/drugs_processed/val_data_5k.pkl'
+torsion_val_path: '../torsional-diffusion/geodiff_split_run/val_drugs_20steps_50confs.pkl'
+test_path: 'data/drugs_processed/test_data_200.pkl'
+torsion_test_path: '../torsional-diffusion/geodiff_split_run/test_drugs_20steps.pkl'
+
+n_node_features: 74
+
+from_torsion: true
+from_rc: false
+from_dmcg: false
+
+etkdg_noise: null
+etkdg: false
+uniform_ratio: null

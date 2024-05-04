@@ -1,0 +1,14 @@
+_target_: src.models.egnn.egnn_model.EGNN
+input_nf: ${dataset.n_node_features}
+input_ef: 4
+node_hidden_dim: 128
+time_emb_dim: 128
+diffusion_steps: ${diffusion.noise_schedule.n_timesteps}
+edge_hidden_dim: 128
+global_edge_hidden_dim: 128
+num_layers: 6
+attention: false
+normalize: true
+layer_norm: true
+tanh: false
+cutoff: 5

@@ -1,0 +1,16 @@
+train_path: 'data/drugs_processed/train_data_39k.pkl'
+dmcg_train_path: '../dmcg/drugs/train.pkl'
+val_path: 'data/drugs_processed/val_data_5k.pkl'
+dmcg_val_path: '../dmcg/drugs/val.pkl'
+test_path: 'data/drugs_processed/test_data_200.pkl'
+dmcg_test_path: '../dmcg/drugs/test.pkl'
+
+n_node_features: 74
+
+from_torsion: false
+from_rc: false
+from_dmcg: true
+
+etkdg_noise: null
+etkdg: false
+uniform_ratio: null

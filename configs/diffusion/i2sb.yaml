@@ -1,0 +1,10 @@
+noise_schedule:
+  _target_: src.diffusions.noise_schedule.symmetric_sigmoid_schedule
+  beta_start: 1e-7
+  beta_end: 2e-3
+  n_timesteps: 1000
+
+diffusion:
+  _partial_: true
+  _target_: src.diffusions.i2sb.I2SBDiffusion
+
