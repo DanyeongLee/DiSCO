@@ -29,7 +29,7 @@ class I2SBDiffusion(nn.Module):
         std_fwd = beta.cumsum(0).sqrt()
         std_bwd = beta.flip(0).cumsum(0).flip(0).sqrt()
 
-        mu_x0, mu_x1, var = get_gaussian_params(std_fwd, std_bwd)
+        mu_x0, mu_x1, var = get_gaussian_params(std_bwd, std_fwd)
         std_sb = var.sqrt()
 
         self.register_buffer('beta', beta)
