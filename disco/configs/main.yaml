@@ -1,0 +1,13 @@
+defaults:
+  - model: 'e3nn'
+  - diffusion: 'i2sb'
+  - train: 'train-default'
+  - dataset: 'qm9'
+  - hydra: 'hydra-default'
+  - _self_
+
+
+seed: 42
+name: 'qm9-default'
+gpu: 0
+ckpt_path: ${hydra:run.dir}/ckpts/${name}.ckpt
