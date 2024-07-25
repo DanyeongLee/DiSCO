@@ -1,0 +1,14 @@
+_target_: disco.models.TensorProductScoreModel
+in_node_features: ${dataset.n_node_features}
+in_edge_features: 4 
+time_emb_dim: 32
+diffusion_steps: ${diffusion.noise_schedule.n_timesteps}
+sh_lmax: 2
+ns: 32
+nv: 8
+num_conv_layers: 4
+max_radius: 5
+radius_embed_dim: 50
+use_second_order_repr: true
+batch_norm: true
+residual: true
