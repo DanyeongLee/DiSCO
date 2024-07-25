@@ -1,0 +1,8 @@
+train_path: 'data/drugs_processed/train.lmdb'
+val_path: 'data/drugs_processed/val.lmdb'
+test_path: 'data/drugs_processed/test.lmdb'
+
+n_node_features: 74
+mmff: false
+
+from_torsion: false
