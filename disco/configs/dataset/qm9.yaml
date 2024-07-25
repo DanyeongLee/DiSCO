@@ -1,0 +1,8 @@
+train_path: 'data/qm9_processed/train.lmdb'
+val_path: 'data/qm9_processed/val.lmdb'
+test_path: 'data/qm9_processed/test.lmdb'
+
+n_node_features: 44
+mmff: false
+
+from_torsion: false
