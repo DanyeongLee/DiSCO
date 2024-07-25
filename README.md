@@ -1,5 +1,5 @@
 # DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization
-Official code of [DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization](https://ojs.aaai.org/index.php/AAAI/article/view/29238) published in AAAI 2024.
+Official code of [DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization](https://ojs.aaai.org/index.php/AAAI/article/view/29238) by D. Lee, D.Lee, D. Bang and S. Kim.
 
 DiSCO is a novel diffusion framework designed for optimizing pre-generated molecular conformers. It utilizes the distribution of existing conformer generation method as informative prior of diffusion process to build a scalable and interpretable diffusion model.
 ![Overview](overview.png)
