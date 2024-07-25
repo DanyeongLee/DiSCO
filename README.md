@@ -1,42 +1,65 @@
 # DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization
+Official code of [DiSCO: Diffusion Schrödinger Bridge for Molecular Conformer Optimization](https://ojs.aaai.org/index.php/AAAI/article/view/29238) published in AAAI 2024.
 
-# Requirements
-- Python==3.8
-- CUDA==11.8
+DiSCO is a novel diffusion framework designed for optimizing pre-generated molecular conformers. It utilizes the distribution of existing conformer generation method as informative prior of diffusion process to build a scalable and interpretable diffusion model.
+![Overview](overview.png)
 
-- We provide script (setting.sh) to install all the required packages.
+## Installation
+We provide conda environment (env.yml) used in our experiment.
+```
+git clone https://github.com/DanyeongLee/DiSCO.git
+cd DiSCO
 
-# Dataset
-- GEOM dataset, and pre-generated conformers for this dataset with three baseline methods (except for RDKit ETKDG) should be appropriately downloaded.
+conda env create -f env.yml
+conda activate disco
+```
+After setting up conda environment, please install our repo using:
+```
+pip install .
+```
 
-- All the data, pre-generated conformers with baseline methods can be downloaded from https://drive.google.com/drive/folders/1XgmgSMNpnb-XE15inieNnN0zKCr1xy0d?usp=sharing.
-    - torsional-diffusion.tar.gz: pre-generated conformers with torsional diffusion
-    - dmcg.tar.gz: pre-generated conformers with dmcg
-    - rdkit-clustering.tar.gz: pre-generated conformers with rdkit+clustering
-    - disco_data.tar.gz: preprocessed GEOM dataset
-
-- Please unzip the all tar.gz files using tar -zxvf commands, and locate them accordingly:
-    - dmcg, torsional-diffusion, rdkit-clustering should be in parent directory of this working directory.
-        - ../dmcg
-        - ../torsional-diffusion
-        - ../rdkit-clustering
-    - data, outputs should be in this working directory.
-        - ./data
-        - ./outputs (not needed for training from scratch)
-
-# Running
-- Major scripts to run our experiments can be found in scripts directory
-    - run_train.sh: Train all four baseline methods for two datasets. This could take very long time.
-    - run_test.sh: Test ensemble RMSD metrics of four baseline methods.
-    - test_prop.sh: Run xTB to calculate ensemble property.
-    - noise_performance.sh: Run DiSCO after the addition of Gaussion noise to the output of torsional diffusion and calculate the ensemble RMSD metrics.
-    - steps_performance.sh: Run DiSCO to the output of torsional diffusion with varying diffusion steps.
-    - mmff_iters_performance.sh: Run DiSCO after the application of MMFF with varying iterations to the output of torsional diffusion.
-    - mmff_four_models_performance: Run DiSCO after the application of MMFF with 200 iterations to the output of four baseline methods.
-
-- Other codes
-    - local_structure_error.py: Compare the local structure prediction error of torsional diffusion and torsional diffusion + DiSCO.
-    - traj_energy_xtb.py: Calculate the energy of intermediate samples from DiSCO with xTB.
+## Dataset
+### Official Geom Dataset
+The offical raw GEOM dataset is avaiable [[here]](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JNGTDF).
+### Preprocessed Dataset
+We provide the preprocessed GEOM data, pre-generated conformers with baseline methods in [[google drive]](https://drive.google.com/drive/folders/1XgmgSMNpnb-XE15inieNnN0zKCr1xy0d?usp=sharing).
 
 
+## Optimizing conformers using DiSCO
+We provide the pretrained model for optimizing conformers generated with RDKit. It can directly handle the RDKit mol object.
+```python
+import torch
+from rdkit import Chem
+from rdkit.Chem import AllChem
+from disco import DiSCO
+
+# Embedding 10 conformers through ETKDG
+mol = Chem.MolFromSmiles('C#CC(=O)[C@H](O)CCC')
+mol = Chem.AddHs(mol)
+AllChem.EmbedMultipleConfs(mol, 10)
+
+# Optimizing through DiSCO
+model = torch.load('deployed/fromrdkit-qm9.pt').to('cuda')
+mol = model(mol) # resulting 'mol' object contains DiSCO-optimized conformers
+```
+
+## Training
+### Using default arguments
+We provide the default configuration files used in our experiments.
+```
+# for QM9 dataset
+python disco/train.py +experiment=fromrdkit-qm9
+```
+```
+# for DRUGS dataset
+python disco/train.py +experiment=fromrdkit-drugs
+```
+### Custom arguments
+You can also train your own customized model by overriding the arguments.
+```
+python disco/train.py +experiment=fromrdkit-drugs diffusion.noise_schedule.n_timesteps=100
+```
+
+## Note
+This 'main' branch is for providing simple and easy-to-use code of DiSCO. For reproduction of all the results provided in our paper, please refer to the [reproduce](https://github.com/DanyeongLee/DiSCO/tree/reproduce) branch.
 
